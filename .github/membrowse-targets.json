@@ -1,0 +1,20 @@
+[
+  {
+    "target_name": "bluepill",
+    "setup_cmd": "pip install numpy Pillow",
+    "build_cmd": "make -f tensorflow/lite/micro/tools/make/Makefile -j$(nproc) TARGET=bluepill OPTIMIZED_KERNEL_DIR=cmsis_nn BUILD_TYPE=release CORE_OPTIMIZATION_LEVEL=\"-Os -g\" KERNEL_OPTIMIZATION_LEVEL=\"-O2 -g\" THIRD_PARTY_KERNEL_OPTIMIZATION_LEVEL=\"-O2 -g\" keyword_benchmark",
+    "elf": "gen/bluepill_x86_64_release_cmsis_nn_gcc/bin/keyword_benchmark",
+    "ld": "tensorflow/lite/micro/tools/make/targets/bluepill/bluepill.lds",
+    "map_file": "gen/bluepill.map",
+    "linker_vars": ""
+  },
+  {
+    "target_name": "linux-x86_64",
+    "setup_cmd": "pip install numpy Pillow",
+    "build_cmd": "LDFLAGS=\"-Wl,-Map=gen/linux_x86_64.map\" make -f tensorflow/lite/micro/tools/make/Makefile -j$(nproc) TARGET=linux TARGET_ARCH=x86_64 BUILD_TYPE=release CORE_OPTIMIZATION_LEVEL=\"-Os -g\" KERNEL_OPTIMIZATION_LEVEL=\"-O2 -g\" THIRD_PARTY_KERNEL_OPTIMIZATION_LEVEL=\"-O2 -g\" keyword_benchmark",
+    "elf": "gen/linux_x86_64_release_gcc/bin/keyword_benchmark",
+    "ld": "",
+    "map_file": "gen/linux_x86_64.map",
+    "linker_vars": ""
+  }
+]
